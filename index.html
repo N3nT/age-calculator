@@ -17,16 +17,19 @@
   <div class="wrap">
     <div class="up">
       <div class="day_wrap">
-        <label for="day">DAY</label>
+        <label for="day" class="day_label">DAY</label>
         <input type="text" name="day" inputmode="numeric" maxlength="2" placeholder="DD" class="input_day">
+        <div class="day_error error_info"></div>
       </div>
       <div class="day_wrap">
-        <label for="month">MONTH</label>
+        <label for="month" class="month_label">MONTH</label>
         <input type="text" name="month" inputmode="numeric" maxlength="2" placeholder="MM" class="input_month">
+        <div class="month_error error_info"></div>
       </div>
       <div class="day_wrap">
-        <label for="year">YEAR</label>
+        <label for="year" class="year_label">YEAR</label>
         <input type="text" name="year" inputmode="numeric" maxlength="4" placeholder="YYYY" class="input_year">
+        <div class="year_error error_info"></div>
       </div>
     </div>
     <div class="line"><div class="circle"><img src="./assets/images/icon-arrow.svg" alt="arrow"></div></div>

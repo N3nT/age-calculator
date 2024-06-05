@@ -14,10 +14,25 @@ body {
   align-items: center;
 }
 
+.error_label {
+  color: hsl(0, 100%, 67%) !important;
+}
+
+.error_input {
+  border: 1px solid hsl(0, 100%, 67%) !important;
+}
+
+.error_info {
+  padding-top: 10px;
+  font-style: italic;
+  font-weight: 400;
+  color: hsl(0, 100%, 67%);
+}
+
 .wrap {
   background-color: white;
   width: 900px;
-  height: 700px;
+  height: 720px;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
   border-bottom-left-radius: 30px;
@@ -60,7 +75,7 @@ body {
 }
 .wrap .up input {
   padding: 20px;
-  width: 150px;
+  width: 200px;
   font-size: 32px;
   border-radius: 10px;
   border: 1px solid hsl(0, 0%, 86%);
