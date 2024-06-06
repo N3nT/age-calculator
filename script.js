@@ -18,6 +18,8 @@ const day_label = document.querySelector('.day_label')
 const month_label = document.querySelector('.month_label')
 const year_label = document.querySelector('.year_label')
 
+const month_30 = [4, 6, 9, 11]
+
 const validDate = () => {
 	if (
 		input_day.value == '' ||
@@ -27,15 +29,15 @@ const validDate = () => {
 		resetTime()
 		if (input_day.value == '') {
 			displayError('input_day', 'The field is required')
-            resetTime()
+			resetTime()
 		}
 		if (input_month.value == '') {
 			displayError('input_month', 'The field is required')
-            resetTime()
+			resetTime()
 		}
 		if (input_year.value == '') {
 			displayError('input_year', 'The field is required')
-            resetTime()
+			resetTime()
 		}
 	} else {
 		if (
@@ -46,53 +48,82 @@ const validDate = () => {
 			resetTime()
 			if (isNaN(input_day.value)) {
 				displayError('input_day', 'Must be a valid number')
-                resetTime()
+				resetTime()
 			}
 			if (isNaN(input_month.value)) {
 				displayError('input_month', 'Must be a valid number')
-                resetTime()
+				resetTime()
 			}
 			if (isNaN(input_year.value)) {
 				displayError('input_year', 'Must be a valid number')
-                resetTime()
+				resetTime()
 			}
 		} else {
-            if(input_day.value < 0 || input_day.value > 31){
-                displayError('input_day', 'Must be a valid number')
-                resetTime()
-            } else if(input_month.value < 0 || input_month.value > 12){
-                displayError('input_month', 'Must be a valid number')
-                resetTime()
-            } else {
-                
-            
-			y = new Date().getFullYear()
-			if (input_year.value > y) {
-				displayError('input_year', 'Must be in past')
+			if (input_day.value < 0 || input_day.value > 31) {
+				displayError('input_day', 'Must be a valid number')
 				resetTime()
-			} else if (input_year.value == y) {
-				m = new Date().getMonth() + 1
-				if (input_month.value > m) {
-					displayError('input_month', 'Must be in past')
+			} else if (input_month.value < 0 || input_month.value > 12) {
+				displayError('input_month', 'Must be a valid number')
+				resetTime()
+			} else {
+				y = new Date().getFullYear()
+				if (input_year.value > y) {
+					displayError('input_year', 'Must be in past')
 					resetTime()
-				} else if (input_month.value == m) {
-					d = new Date().getDate()
-					if (input_day.value > d || input_day.value == d) {
-						displayError('input_day', 'Must be in past')
+				} else if (input_year.value == y) {
+					m = new Date().getMonth() + 1
+					if (input_month.value > m) {
+						displayError('input_month', 'Must be in past')
 						resetTime()
+					} else if (input_month.value == m) {
+						d = new Date().getDate()
+						if (input_day.value > d || input_day.value == d) {
+							displayError('input_day', 'Must be in past')
+							resetTime()
+						} else {
+							daysInMonth()
+						}
 					} else {
-						resetError()
-						updateTime()
+						daysInMonth()
 					}
-				} else{
-                    resetError()
-                    updateTime()
-                }
+				} else {
+					daysInMonth()
+				}
+			}
+		}
+	}
+}
+
+const daysInMonth = () => {
+	console.log((input_year.value % 4 == 0 && input_year.value & (100 != 0)) ||
+	input_year.value % 400 == 0);
+	if (month_30.includes(parseInt(input_month.value))) {
+		if (input_day.value > 30) {
+			displayError('input_day', 'Must be a valid date')
+		}
+	} else if (parseInt(input_month.value) == 2) {
+		console.log('jest if');
+		if (
+			(input_year.value % 4 == 0 && input_year.value & (100 != 0)) ||
+			input_year.value % 400 == 0
+		) {
+			if (input_day.value > 29) {
+				displayError('input_day', 'Must be a valid date')
 			} else {
 				resetError()
 				updateTime()
-			}}
+			}
+		} else {
+			if (input_day.value > 28) {
+				displayError('input_day', 'Must be a valid date')
+			} else {
+				resetError()
+				updateTime()
+			}
 		}
+	} else {
+		resetError()
+		updateTime()
 	}
 }
 
